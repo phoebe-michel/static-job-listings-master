@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Spartan" />
+    <title>Frontend Mentor | Job Listings</title>
+  </head>
+  <body>
+    <div id="app" class="job-list-container">
+      <!-- this header is on the top of the page -->
+      <div class="job-list-header"></div>
+      <!-- filter -->
+
+      <!-- this section will display all of the job listings -->
+      <div class="job-list-section" v-for="job in jobList">
+        <div :class="{'job-listing':true, featured: job.featured}">
+          <div class="pic"><img :src="job.logo" :alt="job.company" /></div>
+          <div class="job-info">
+            <div class="job-description">
+              <div class="job-labels-primary">
+                <span class="company-name">{{job.company}}</span>
+                <span v-if="job.new" class="label-new">New!</span>
+                <span v-if="job.featured" class="label-featured">Featured</span>
+              </div>
+              <div class="job-position">{{job.position}}</div>
+              <div class="job-labels-secondary">
+                <li class="job-post-date">{{job.postedAt}}</li>
+                <li class="job-contract">{{job.contract}}</li>
+                <li class="job-location">{{job.location}}</li>
+              </div>
+            </div>
+            <div class="job-categories-section">
+              <span class="job-category job-role" @click="addFilter(job.role)"
+                >{{job.role}}</span
+              >
+              <span class="job-category job-level" @click="addFilter(job.level)"
+                >{{job.level}}</span
+              >
+              <span
+                @click="addFilter(language)"
+                v-if="job.languages"
+                v-for="language in job.languages"
+                class="job-category job-languages"
+                >{{language}}</span
+              >
+              <span
+                @click="addFilter(tool)"
+                v-if="job.tools"
+                class="job-category"
+                v-for="tool in job.tools"
+                >{{tool}}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="./app.js"></script>
+    </div>
+  </body>
+</html>
