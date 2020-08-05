@@ -19,7 +19,15 @@
       <!-- this header is on the top of the page -->
       <div class="job-list-header"></div>
       <!-- filter -->
-
+    <div class="job-list-filter" v-show="jobFilters.length>0">
+        <div class="filter-section">
+          <div class="filters" v-for="filter in jobFilters">
+            <span class="job-category">{{filter}}</span>
+            <span class="remove" @click="removeFilter(filter)">x</span>
+          </div>
+        </div>
+      <span class="clear" @click="clearAllFilters">Clear</span>
+    </div>
       <!-- this section will display all of the job listings -->
       <div class="job-list-section" v-for="job in jobList">
         <div :class="{'job-listing':true, featured: job.featured}">
@@ -46,24 +54,29 @@
                 >{{job.level}}</span
               >
               <span
+                class="job-category"
                 @click="addFilter(language)"
-                v-if="job.languages"
-                v-for="language in job.languages"
-                class="job-category job-languages"
+                v-for="language in job.languages"
                 >{{language}}</span
               >
               <span
-                @click="addFilter(tool)"
-                v-if="job.tools"
                 class="job-category"
-                v-for="tool in job.tools"
+                @click="addFilter(tool)"
+                v-for="tool in job.tools"
                 >{{tool}}</span
               >
             </div>
           </div>
         </div>
       </div>
-
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >
+        <div class="br"></div>
+        Coded by <a href="#">Phoebe M.</a>.
+      </div>
       <script src="./app.js"></script>
     </div>
   </body>
