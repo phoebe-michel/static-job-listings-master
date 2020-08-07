@@ -35,7 +35,7 @@ body {
   height: 120px;
   background-size: 100%;
   background-repeat: no-repeat;
-  background-image: url("../images/bg-header-mobile.svg");
+  background-image: url("images/bg-header-mobile.svg");
   margin-bottom: 6vh;
 }
 
@@ -238,7 +238,7 @@ body {
 @media screen and (min-width: 768px) {
   .job-list-header {
     height: 90px;
-    background-image: url("../images/bg-header-desktop.svg");
+    background-image: url("images/bg-header-desktop.svg");
   }
 }
 
