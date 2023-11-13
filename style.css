@@ -93,8 +93,7 @@ body {
 
 /* ----------job-listing-section ----------*/
 .job-list-section {
-  margin: block;
-  margin: 0vh 5vw 3vh;
+  margin: 0vh 5vw;
 }
 
 .job-list-section .job-listing {
@@ -190,18 +189,22 @@ body {
 .job-categories-section {
   border-top: 0.5px solid var(--very-dark-grayish-cyan);
   position: static;
-  padding-top: 15px;
   margin-top: 15px;
+  padding-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .job-category {
   background-color: var(--filter-tablet-color);
   color: var(--dark-cyan-primary);
   font-weight: 700;
-  padding: 5px;
-  margin-left: 5px;
+  padding: 4px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   font-size: 14px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .job-categories-section span:hover {
@@ -212,24 +215,32 @@ body {
 /*---------------end job-listing: categories/filters ----------------*/
 
 @media screen and (min-width: 600px) {
-  .job-info {
-    margin-left: 130px;
-  }
-
-  /*-------------- job-listing -----------  */
-  .job-listing img {
-    position: static;
-    float: left;
-    width: 120px;
-    height: 120px;
-  }
-
+/*-------------- job-listing -----------  */
+  
   .job-list-section .job-listing {
     height: auto;
     margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
   }
 
-  .job-position {
+   .job-list-section .job-listing .pic {
+    float: left;
+  }
+
+  .job-list-section .job-listing .pic img {
+    position: static;
+    width: 70px;
+    height: 70px;
+  }
+
+  .job-list-section .job-info {
+    margin: 0 10px;
+    width: 100%;
+  }
+
+  .job-list-section .job-description .job-position {
     font-size: 18px;
   }
   /*---------------end job-listing ----------------*/
@@ -240,25 +251,13 @@ body {
     height: 90px;
     background-image: url("./images/bg-header-desktop.svg");
   }
+  
 }
 
 @media screen and (min-width: 992px) {
   .job-list-header {
     height: 110px;
   }
-
-  /* ----------job-listing-section ----------*/
-
-  .job-list-section .job-listing {
-    padding-top: 40px;
-  }
-
-  .job-listing img {
-    position: relative;
-    height: 100%;
-  }
-
-  /* ---------- end job-listing-section ----------*/
 
   /* -----------------job-listing: job-listing labels ------------ */
 
@@ -285,9 +284,10 @@ body {
     color: var(--dark-cyan-primary);
     font-weight: 700;
     padding: 5px;
-    margin-left: 5px;
-    font-size: 16px;
+    margin: 10px;
+    font-size: 14px;
     cursor: pointer;
+    border-radius: 3px;
   }
 
   .job-categories-section span:hover {
