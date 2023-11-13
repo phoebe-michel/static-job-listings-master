@@ -22,8 +22,10 @@
     <div class="job-list-filter" v-show="jobFilters.length>0">
         <div class="filter-section">
           <div class="filters" v-for="filter in jobFilters">
-            <span class="job-category">{{filter}}</span>
-            <span class="remove" @click="removeFilter(filter)">x</span>
+            <div class="job-category">
+              <span class="title">{{filter}}</span>
+              <span class="remove" @click="removeFilter(filter)">x</span>
+            </div>
           </div>
         </div>
       <span class="clear" @click="clearAllFilters">Clear</span>
