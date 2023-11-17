@@ -173,15 +173,14 @@ var vm = new Vue({
       }
     },
   },
-  
+
   computed: {
-    filteredNames() {
+    filteredJobList: function () {
       return this.jobList.filter((job) => {
-        //var items = job.languages.length + job.tools.length + job.role.length + job.level.length
-        for(i=0;i<job.languages.length; i++) {
-            return job.languages[i].includes(this.jobFilters);
-        }
-      })
-  }
-}
+        let items = [job.role, job.level, ...job.languages, ...job.tools];
+        let filters = this.jobFilters;
+        return filters.every((filter) => items.includes(filter));
+      });
+    },
+  },
 });

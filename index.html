@@ -31,7 +31,7 @@
       <span class="clear" @click="clearAllFilters">Clear</span>
     </div>
       <!-- this section will display all of the job listings -->
-      <div class="job-list-section" v-for="job in jobList">
+      <div class="job-list-section" v-for="job in filteredJobList">
         <div :class="{'job-listing':true, featured: job.featured}">
           <div class="pic"><img :src="job.logo" :alt="job.company" /></div>
           <div class="job-info">
