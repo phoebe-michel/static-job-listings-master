@@ -1,102 +1,116 @@
-# Frontend Mentor - Job Listings Challenge
+# Job listings with filtering solution using Vue.js and Fetch API
 
-![Design preview for the Job Listings coding challenge](./design/desktop-preview.jpg)
+This is a solution to the [Job listings with filtering challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/job-listings-with-filtering-ivstIPCt).
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Job listings with filtering solution using Vue.js and Fetch API](#job-listings-with-filtering-solution-using-vuejs-and-fetch-api)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+      - [Desktop](#desktop)
+    - [Links](#links)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+    - [My Solution (In-Depth)](#my-solution-in-depth)
+    - [What I Learned](#what-i-learned)
+    - [Useful resources](#useful-resources)
+  - [Author](#author)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges allow you to improve your skills in a real-life workflow.
+## Overview
 
-**To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
+### The challenge
 
-## The challenge
-
-Your challenge is to build out this job listing page and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to:
+Users should be able to:
 
 - View the optimal layout for the site depending on their device's screen size
 - See hover states for all interactive elements on the page
 - Filter job listings based on the categories
 
-### Filtering
+### Screenshot
 
-#### Option 1
+<img src="./images/mobile-screenshot.png" alt="Mobile Layout" style="height: 500px; width:auto;float:left; padding-right:40px;" />
 
-Filter job listings based on the categories using the HTML `data-` attribute. In this option, you'd use the hardcoded content that already exists in the [index.html](./index.html) file.
+<img src="./images/tablet-screenshot.png" alt="Mobile Layout" style="height: 500px; width:auto;" />
 
-The categories are:
+#### Desktop
 
-- Role: Frontend, Backend, Fullstack
-- Level: Junior, Midweight, Senior
-- Languages: Python, Ruby, JavaScript, HTML, CSS
-- Tools: React, Sass, Vue, Django, RoR (Ruby on Rails)
+<img src="./images/desktop-screenshot.png" alt="Desktop Layout" />
 
-So, if a job listing is for has the following categories `Frontend, Junior, JavaScript, React` your HTML data attributes would look like this `data-role="frontend" data-level="junior" data-languages="javascript" data-tools="react"`.
+### Links
 
-#### Option 2
+- Solution: [Click to view](https://github.com/phoebe-michel/static-job-listings-master)
+- Live Site: [Click to view](https://phoebe-michel.github.io/static-job-listings-master/)
 
-Use the [data.json](./data.json) file to pull the data and then dynamically add the content. This would be perfect if you're looking to practice a JS library/framework like React, Vue, or Svelte.
+## My process
 
-To add a filter, the user needs to click on the tablets on the right-side of the listing on desktop or the bottom on mobile. For each filter added, only listings containing all selected filters should be returned.
+### Built with
 
-Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [Vue.js](https://vuejs.org/) - JS library
 
-## Where to find everything
+### My Solution (In-Depth)
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design to work to. 
+- Using the JavaScript Fetch API, I loaded the job listing data and saved it to an array, `jobList`.
 
-The designs are in JPG static format. This will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. This should help train your eye to perceive differences in spacings and sizes.
+  ```js
+  loadDataFromJson: async function () {
+    let url = "./data.json";
 
-If you would like the Sketch file in order to inspect the design in more detail it is available to buy from the challenge page on the platform.
+    await fetch(url)
+    .then(async (response) => {
+      this.jobList = await response.json();
+    })
+    .catch((error) => console.log(error));
+  },
+  ```
 
-You will find all the required assets in the `/images` folder. The assets are already optimized.
+- The visibility of the filter bar is based on the length of the array, `jobFilters`. 
 
-There is also a `style-guide.md` file, which contains the information you'll need, such as color palette and fonts.
+  ```html
+  <div class="job-list-filter" v-show="jobFilters.length>0"> 
+    ...
+  </div>
+  ```
+  On initial load, the `jobFilters` array is empty and, as a result, the filter bar is hidden. When a user clicks on the filter tabs on the right side of each job listing, the addFilter() method is invoked which checks to see if the filter already exists in `jobFilters`. If not, the value is stored in the array and the filter bar becomes visible.
 
-## Building your project
+  ```js
+  addFilter: function (filter) {
+    var filterExists = this.jobFilters.includes(filter);
+    if (!filterExists) {
+      this.jobFilters.push(filter);
+    }
+  },
+  ```
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+- The jobList is rendered to the webpage using a computed property, `filteredJobList`. On initial load, all job listings are rendered since the user hasn't clicked on any filters yet. However, when the user clicks on a filter, the program uses the array methods, `.filter()` and `.every()`, to loop through `jobList` and display only the jobs that match the filters in `jobFilters` array.
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). This will make it easier to share your code with the community if you need some help. If you're not sure how to do this, [have a read through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a URL. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, but we recommend using [Vercel](https://bit.ly/fem-vercel). We've got more information about deploying your project with Vercel below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes that you could create to make reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
-7. If you'd like to try making your project fully responsive, we'd recommend checking out [Sizzy](https://bit.ly/fm-sizzy). It's a great browser that makes it easy to view your site across multiple devices.
+  ```js
+  filteredJobList: function () {
+      return this.jobList.filter((job) => {
+        let items = [job.role, job.level, ...job.languages, ...job.tools];
+        let filters = this.jobFilters;
+        return filters.every((filter) => items.includes(filter));
+      });
+    },
+  ```
 
-## Deploying your project
+### What I Learned
 
-As mentioned above, there are a number of ways to host your project for free. We recommend using [Vercel](https://bit.ly/fem-vercel) as it's an amazing service and extremely simple to get set up with. If you'd like to use Vercel, here are some steps to follow to get started:
+This challenge was a great way to refamiliarize myself with array helper methods such as `.every()`, and with using the Fetch API. I was also able to use CSS Grid and FlexBox to get the desired layout, which is always fun.
 
-1. [Sign up to Vercel](https://bit.ly/fem-vercel-signup) and go through the onboarding flow, ensuring your GitHub account is connected by using their [Vercel for GitHub](https://vercel.com/docs/v2/git-integrations/vercel-for-github) integration.
-2. Connect your project to Vercel from the ["Import project" page](https://vercel.com/import), using the "From Git Repository" button and selecting the project you want to deploy.
-3. Once connected, every time you `git push`, Vercel will create a new [deployment](https://vercel.com/docs/v2/platform/deployments) and the deployment URL will be shown on your [Dashboard](https://vercel.com/dashboard). You will also receive an email for each deployment with the URL.
+### Useful resources
 
-## Sharing your solution
+- [JavaScript Tutorial - JavaScript Fetch API](https://www.javascripttutorial.net/web-apis/javascript-fetch-api/)
+- [Learn CSS Grid](https://learncssgrid.com/)
+- [A Complete Guide to CSS Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
-There are multiple places you can share your solution:
+## Author
 
-1. Submit it on the platform so that other users will see your solution on the site. Here's our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) to help you do that.
-2. Share your solution page in the **#finished-projects** channel of the [Slack community](https://www.frontendmentor.io/slack).
-3. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor** including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-
-## Giving feedback
-
-Feedback is always welcome, so if you have any to give on this challenge please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
-
-## Community Sponsors
-
-A massive thank you to our community sponsors!
-
-- [Vercel](https://bit.ly/fem-vercel) offers an amazing website hosting service, which is super simple to set up. Just connect your GitHub account, point to a repo and your site will be deployed. Perfect for your website and frontend hosting needs - especially since it's free to get started!
-- [Sizzy](https://bit.ly/fm-sizzy) is an extremely useful browser designed specifically to improve a developer's workflow when building websites. You can fire up multiple device emulators and run them all in sync while building out your web pages. Perfect for helping build fully responsive websites!
-- [Qualified](https://bit.ly/fem-qualified) helps companies assess engineers with realistic code tests and pair-programming interviews. Their assessments test on-the-job skills as opposed to algorithmic puzzles which leads to a much better recruitment process for everyone involved.
+- Website - [Phoebe Michel](https://github.com/phoebe-michel)
+- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/awkwardblackcoder)

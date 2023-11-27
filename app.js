@@ -16,7 +16,7 @@ var vm = new Vue({
         .catch((error) => console.log(error));
     },
     addFilter: function (filter) {
-      var filterExists = this.jobFilters.includes(filter); //if 'filter' item wasn't already added to array, add it to 'jobFilters' array.
+      var filterExists = this.jobFilters.includes(filter);
       if (!filterExists) {
         this.jobFilters.push(filter);
       }
