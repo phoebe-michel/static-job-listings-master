@@ -32,7 +32,7 @@ body {
 
 .job-list-header {
   background-color: var(--dark-cyan-primary);
-  height: 120px;
+  height: 150px;
   background-size: 100%;
   background-repeat: no-repeat;
   background-image: url("./images/bg-header-mobile.svg");
@@ -219,6 +219,8 @@ body {
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
+  list-style: none;
+  display: inline;
 }
 
 .job-categories-section span:hover {
@@ -262,16 +264,12 @@ body {
 
 @media screen and (min-width: 768px) {
   .job-list-header {
-    height: 90px;
     background-image: url("./images/bg-header-desktop.svg");
   }
   
 }
 
 @media screen and (min-width: 992px) {
-  .job-list-header {
-    height: 110px;
-  }
 
   /* -----------------job-listing: job-listing labels ------------ */
 

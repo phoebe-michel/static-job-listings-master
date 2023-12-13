@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Frontend Mentor | Job Listings</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="https://fonts.google.com/specimen/Spartan" />
-    <title>Frontend Mentor | Job Listings</title>
   </head>
   <body>
-    <div id="app" class="job-list-container">
-      <!-- this header is on the top of the page -->
-      <div class="job-list-header"></div>
+    <main id="app" class="job-list-container">
+      <header class="job-list-header"></header>
+
       <!-- filter -->
-    <div class="job-list-filter" v-show="jobFilters.length>0">
+      <section class="job-list-filter" v-show="jobFilters.length>0">
         <div class="filter-section">
-          <div class="filters" v-for="filter in jobFilters">
-            <div class="job-category">
+
+          <ul class="filters" v-for="filter in jobFilters">
+            <li class="job-category">
               <span class="title">{{filter}}</span>
               <span class="remove" @click="removeFilter(filter)">x</span>
-            </div>
-          </div>
+            </li>
+          </ul>
+
         </div>
-      <span class="clear" @click="clearAllFilters">Clear</span>
-    </div>
+        <span class="clear" @click="clearAllFilters">Clear</span>
+      </section>
+
       <!-- this section will display all of the job listings -->
-      <div class="job-list-section" v-for="job in filteredJobList">
-        <div :class="{'job-listing':true, featured: job.featured}">
+      <section class="job-list-section" v-for="job in filteredJobList">
+        <article :class="{'job-listing':true, featured: job.featured}">
           <div class="pic"><img :src="job.logo" :alt="job.company" /></div>
           <div class="job-info">
             <div class="job-description">
@@ -43,43 +41,51 @@
               </div>
               <div class="job-position">{{job.position}}</div>
               <div class="job-labels-secondary">
-                <li class="job-post-date">{{job.postedAt}}</li>
-                <li class="job-contract">{{job.contract}}</li>
-                <li class="job-location">{{job.location}}</li>
+                <ul>
+                  <li class="job-post-date">{{job.postedAt}}</li>
+                  <li class="job-contract">{{job.contract}}</li>
+                  <li class="job-location">{{job.location}}</li>
+                </ul>
               </div>
             </div>
-            <div class="job-categories-section">
-              <span class="job-category job-role" @click="addFilter(job.role)"
-                >{{job.role}}</span
-              >
-              <span class="job-category job-level" @click="addFilter(job.level)"
-                >{{job.level}}</span
-              >
-              <span
+
+            <ul class="job-categories-section">
+              <li class="job-category job-role" @click="addFilter(job.role)">
+                {{job.role}}
+              </li>
+
+              <li class="job-category job-level" @click="addFilter(job.level)">
+                {{job.level}}
+              </li>
+
+              <li
                 class="job-category"
                 @click="addFilter(language)"
-                v-for="language in job.languages"
-                >{{language}}</span
-              >
-              <span
+                v-for="language in job.languages">
+                {{language}}
+              </li>
+
+              <li
                 class="job-category"
                 @click="addFilter(tool)"
-                v-for="tool in job.tools"
-                >{{tool}}</span
-              >
-            </div>
+                v-for="tool in job.tools">
+                {{tool}}
+              </li>
+            </ul>
+
           </div>
-        </div>
-      </div>
-      <div class="attribution">
+        </article>
+      </section>
+
+      <footer class="attribution">
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
           >Frontend Mentor</a
         >
         <div class="br"></div>
         Coded by <a href="https://linkedin.com/in/phoebe-michel">Phoebe M.</a>.
-      </div>
+      </footer>
       <script src="./app.js"></script>
-    </div>
+    </main>
   </body>
 </html>
