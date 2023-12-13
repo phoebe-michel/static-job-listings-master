@@ -113,4 +113,4 @@ This challenge was a great way to refamiliarize myself with array helper methods
 ## Author
 
 - Website - [Phoebe Michel](https://github.com/phoebe-michel)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/awkwardblackcoder)
+- Frontend Mentor - [@awkwardblackcoder](https://www.frontendmentor.io/profile/awkwardblackcoder)
